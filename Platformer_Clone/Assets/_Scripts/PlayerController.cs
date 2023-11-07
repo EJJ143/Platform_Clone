@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     public float fallDepth;
     public int wumpaFruit;
     public int lives;
+
+    // A.S
+    private Vector3 startPos;
      
    
 
@@ -60,6 +63,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             //this is reserved for the jump function
+
+
         }
     }
     private void SpinAttack()
