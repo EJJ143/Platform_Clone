@@ -10,60 +10,75 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //All game objects go below this line
-    public GameObject spawnPoint;
+    //public GameObject spawnPoint;
     public GameObject turnHere;
 
     //All integers/floats go below this line
     public float speed;
-    public float jumpForce;  
+    public float jumpForce = 8f;  
     public float fallDepth;
-    public int wumpaFruit;
-    public int lives;
-
-    // A.S
-    private Vector3 startPos;
-     
-   
+    public int wumpaFruitCollected = 0;
+    public int lives = 3;
 
     //All Vector3's go below this line
-    private Vector3 spawnPosition;
+    private Vector3 startPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        spawnPosition = spawnPoint.transform.position;
+        startPosition =transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // WASD Movement
         if (Input.GetKey(KeyCode.A))
         {
+            Debug.Log("Move the player Left");
            //the A key goes LEFT
             transform.position += Vector3.left * speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S))
         {
+            Debug.Log("Move the player Back");
             //the S key goes BACK
             transform.position += Vector3.back * speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D)) 
         {
+            Debug.Log("Move the player Right");
             //D key to go RIGHT
             transform.position += Vector3.right * speed * Time.deltaTime;
         }
         if(Input.GetKey(KeyCode.W))
         {
+            Debug.Log("Move the player Forward");
             //W key to go FORWARD
             transform.position += Vector3.forward * speed * Time.deltaTime;
         }    
     }
+    private void Respawn()
+    {
+        lives--;
+        //brings the player back to the startPosition
+        transform.position = startPosition;
+        //check to see if player has 0 lives
+        if (lives == 0)
+        {
+            //insert scenemanager here with endscreen
+        }
+    }
+
+
     private void Jump()
     {
-        if (Input.GetKey(KeyCode.Space))
+        //Handles jumping 
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             //this is reserved for the jump function
 
+            //A.S working
 
         }
     }
@@ -74,17 +89,17 @@ public class PlayerController : MonoBehaviour
             //this is reserved for the spin attack, i felt like it should be left click but it can be whatever
         }
     }
-    private void LoseALife()
-    {
-
-    }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "WumpaFruit")
         {
-            ++wumpaFruit;
+            //if collide with a wumpa fruit add it to score and delete it
+            wumpaFruitCollected++;
+            other.gameObject.SetActive(false);
         }
+
+
         if (other.gameObject.tag == "TurnRight")
         {
             Rotate();
