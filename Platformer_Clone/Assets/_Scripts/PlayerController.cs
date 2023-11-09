@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     //All game objects go below this line
     //public GameObject spawnPoint;
     public GameObject turnHere;
+    public Portal portal;
 
     //All integers/floats go below this line
     public float speed;
@@ -105,6 +106,12 @@ public class PlayerController : MonoBehaviour
             Rotate();
             transform.Rotate(0f, 90f, 0f);
             Debug.Log("you collided with the game object");
+        }
+
+        if (other.gameObject.tag == "Portal") 
+        {
+            startPosition = other.gameObject.GetComponent<Portal>().newSpawn.transform.position;
+            transform.position = startPosition;
         }
     }
     public void Rotate(float xAngle = 0f, float rotationAngle = 90f, float zAngle = 0f, Space relativeTo = Space.Self)

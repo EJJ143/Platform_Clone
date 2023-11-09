@@ -24,6 +24,8 @@ public class ShieldEnemyController : MonoBehaviour
     {
         rightPos = rightPoint.transform.position;
         leftPos = leftPoint.transform.position;
+
+        ShieldTurtleMove();
     }
 
     private void ShieldTurtleMove()
@@ -32,8 +34,27 @@ public class ShieldEnemyController : MonoBehaviour
         {
             if (transform.position.x >= rightPos.x)
             {
-
+                goingRight = false;
+                Debug.Log("goingRight is now false");
+            }
+            else
+            {
+                transform.position += Vector3.forward * speed * Time.deltaTime;
+            }          
+        }
+        if (!goingRight)
+        {
+            if (transform.position.x >= leftPos.x)
+            {
+                goingRight = true;
+                Debug.Log("goingRight is now true");
+            }
+            else
+            {
+                transform.position += transform.forward * speed * Time.deltaTime;
             }
         }
+
+
     }
 }
