@@ -37,25 +37,25 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Move the player Left");
            //the A key goes LEFT
-            transform.position += Vector3.left * speed * Time.deltaTime;
+            transform.position += transform.right * speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S))
         {
             Debug.Log("Move the player Back");
             //the S key goes BACK
-            transform.position += Vector3.back * speed * Time.deltaTime;
+            transform.position += transform.forward * speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D)) 
         {
             Debug.Log("Move the player Right");
             //D key to go RIGHT
-            transform.position += Vector3.right * speed * Time.deltaTime;
+            transform.position += -transform.right * speed * Time.deltaTime;
         }
         if(Input.GetKey(KeyCode.W))
         {
             Debug.Log("Move the player Forward");
             //W key to go FORWARD
-            transform.position += Vector3.forward * speed * Time.deltaTime;
+            transform.position += -transform.forward * speed * Time.deltaTime;
         }    
     }
     private void Respawn()

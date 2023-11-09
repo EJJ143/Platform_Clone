@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Wumpa Fruit: " + playerController.wumpaFruit;
+        scoreText.text = "Wumpa Fruit: " + playerController.wumpaFruitCollected;
         livesText.text = "Lives: " + playerController.lives;
     }
 }
