@@ -980,6 +980,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4293185306901751611, guid: ad914bd9f82ca4b489d8e3cec18beb95, type: 3}
+      propertyPath: m_TagString
+      value: Portal
+      objectReference: {fileID: 0}
     - target: {fileID: 4424915348842948951, guid: ad914bd9f82ca4b489d8e3cec18beb95, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -1659,87 +1663,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 250891000}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &267615674
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 267615677}
-  - component: {fileID: 267615676}
-  - component: {fileID: 267615675}
-  m_Layer: 0
-  m_Name: RightTurnTrigger
-  m_TagString: TurnRight
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &267615675
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 267615674}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 14.12, y: 6.01, z: 0.79}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &267615676
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 267615674}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!4 &267615677
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 267615674}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.20654894, z: -0, w: 0.9784363}
-  m_LocalPosition: {x: -4.13, y: 3.42, z: 17.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 23.84, z: 0}
 --- !u!1 &283307080
 GameObject:
   m_ObjectHideFlags: 0
@@ -10112,7 +10035,7 @@ MonoBehaviour:
   turnHere: {fileID: 0}
   portal: {fileID: 0}
   speed: 10
-  jumpForce: 0
+  jumpForce: 5
   fallDepth: -10
   wumpaFruitCollected: 0
   lives: 3
@@ -10702,6 +10625,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1495229555330948092, guid: cf2502c704f66e941a40b5346add6d61, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.47
+      objectReference: {fileID: 0}
     - target: {fileID: 2897420886733777468, guid: cf2502c704f66e941a40b5346add6d61, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -10721,6 +10648,10 @@ PrefabInstance:
     - target: {fileID: 3584705819322834237, guid: cf2502c704f66e941a40b5346add6d61, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3617372841154178162, guid: cf2502c704f66e941a40b5346add6d61, type: 3}
+      propertyPath: m_TagString
+      value: Portal
       objectReference: {fileID: 0}
     - target: {fileID: 3891566221321959746, guid: cf2502c704f66e941a40b5346add6d61, type: 3}
       propertyPath: m_IsTrigger
@@ -10778,6 +10709,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: WumpaFruit
       objectReference: {fileID: 0}
+    - target: {fileID: 4540109182888339102, guid: cf2502c704f66e941a40b5346add6d61, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717737677526863571, guid: cf2502c704f66e941a40b5346add6d61, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.74
+      objectReference: {fileID: 0}
     - target: {fileID: 5136898148282012983, guid: cf2502c704f66e941a40b5346add6d61, type: 3}
       propertyPath: m_TagString
       value: WumpaFruit
@@ -10826,6 +10765,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: WumpaFruit
       objectReference: {fileID: 0}
+    - target: {fileID: 8081511490616447316, guid: cf2502c704f66e941a40b5346add6d61, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15.99
+      objectReference: {fileID: 0}
     - target: {fileID: 8428978709409852622, guid: cf2502c704f66e941a40b5346add6d61, type: 3}
       propertyPath: m_TagString
       value: WumpaFruit
@@ -10847,7 +10790,6 @@ SceneRoots:
   - {fileID: 2007235942}
   - {fileID: 1118671567}
   - {fileID: 381921175}
-  - {fileID: 267615677}
   - {fileID: 5375822249577373147}
   - {fileID: 123883860}
   - {fileID: 571316863}

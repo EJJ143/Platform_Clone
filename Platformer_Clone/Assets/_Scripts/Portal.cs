@@ -6,7 +6,7 @@ public class Portal : MonoBehaviour
 {
     public GameObject newSpawn;
 
-    private Vector3 newSpawnPosition;
+    
     // Start is called before the first frame update
     void Start()
     {

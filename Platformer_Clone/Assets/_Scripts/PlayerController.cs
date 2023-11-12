@@ -13,31 +13,49 @@ public class PlayerController : MonoBehaviour
     //public GameObject spawnPoint;
     public GameObject turnHere;
     public Portal portal;
+    private Rigidbody rigidBody;
 
     //All integers/floats go below this line
     public float speed;
     public float jumpForce = 8f;  
-    public float fallDepth;
+    public float fallDepth = 10f;
     public int wumpaFruitCollected = 0;
     public int lives = 3;
 
     //All Vector3's go below this line
     private Vector3 startPosition;
 
+    private bool isGrounded;
+
     // Start is called before the first frame update
     void Start()
     {
-        startPosition =transform.position;
+        startPosition = transform.position;
+        rigidBody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
         // WASD Movement
+        Move();
+        Turn();
+        Jump();
+       
+    }
+    
+    private void Move()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            Debug.Log("Move the player Forward");
+            //W key to go FORWARD
+            transform.position += -transform.forward * speed * Time.deltaTime;
+        }
         if (Input.GetKey(KeyCode.A))
         {
             Debug.Log("Move the player Left");
-           //the A key goes LEFT
+            //the A key goes LEFT
             transform.position += transform.right * speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S))
@@ -46,19 +64,27 @@ public class PlayerController : MonoBehaviour
             //the S key goes BACK
             transform.position += transform.forward * speed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.D)) 
+        if (Input.GetKey(KeyCode.D))
         {
             Debug.Log("Move the player Right");
             //D key to go RIGHT
             transform.position += -transform.right * speed * Time.deltaTime;
         }
-        if(Input.GetKey(KeyCode.W))
-        {
-            Debug.Log("Move the player Forward");
-            //W key to go FORWARD
-            transform.position += -transform.forward * speed * Time.deltaTime;
-        }    
     }
+    private void Turn()
+    {
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            transform.Rotate(0f, -90f, 0f);
+        }
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            transform.Rotate(0f, 90f, 0f);
+        }
+    }
+    /// <summary>
+    /// Handles the respawn function
+    /// </summary>
     private void Respawn()
     {
         lives--;
@@ -71,12 +97,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Handles the player jump
+    /// </summary>
     private void Jump()
     {
-        //Handles jumping 
-        if (Input.GetKeyDown(KeyCode.Space))
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1.5f))
         {
+            isGrounded = true;
+            Debug.Log("on ground");
+        }
+        else
+        {
+            isGrounded = false;
+            Debug.Log("not on the ground");
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Space)&& isGrounded == true)
+        {
+            rigidBody.AddForce(Vector3.up *jumpForce, ForceMode.Impulse);
+            
             //this is reserved for the jump function
 
             //A.S working
@@ -99,23 +140,11 @@ public class PlayerController : MonoBehaviour
             wumpaFruitCollected++;
             other.gameObject.SetActive(false);
         }
-
-
-        if (other.gameObject.tag == "TurnRight")
-        {
-            Rotate();
-            transform.Rotate(0f, 90f, 0f);
-            Debug.Log("you collided with the game object");
-        }
-
         if (other.gameObject.tag == "Portal") 
         {
             startPosition = other.gameObject.GetComponent<Portal>().newSpawn.transform.position;
             transform.position = startPosition;
         }
     }
-    public void Rotate(float xAngle = 0f, float rotationAngle = 90f, float zAngle = 0f, Space relativeTo = Space.Self)
-    {
-        
-    }
+   
 }
