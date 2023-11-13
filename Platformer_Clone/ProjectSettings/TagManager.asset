@@ -7,6 +7,9 @@ TagManager:
   - WumpaFruit
   - TurnRight
   - Portal
+  - Turtle
+  - Shielded Enemy
+  - PlayerController
   layers:
   - Default
   - TransparentFX
