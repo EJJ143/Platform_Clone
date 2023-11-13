@@ -171,6 +171,21 @@ public class PlayerController : MonoBehaviour
                 lives++;
             }
         }
+        if(other.gameObject.tag == "RegularEnemy")
+        {
+            if(isGrounded == false)
+            {
+                other.gameObject.SetActive(false);
+            }
+            if (attacking == true)
+            {
+                other.gameObject.SetActive(false);
+            }
+            if (attacking == false && isGrounded == true)
+            {
+                Respawn();
+            }
+        }
         if (other.gameObject.tag == "Portal")
         {
             startPosition = other.gameObject.GetComponent<Portal>().newSpawn.transform.position;
