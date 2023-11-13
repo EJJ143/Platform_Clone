@@ -33,13 +33,14 @@ public class TurtleEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        EnemyMove();
+        TurtleEnemyMove();
     }
     /// <summary>
     /// Make the enemy move forward and back
     /// </summary>
-    private void EnemyMove()
+    private void TurtleEnemyMove()
     {
+        RaycastHit hit;
         if (goingForward == true)
         {
             //once the enemy reaches the forwardPos - goingForward is false
@@ -66,5 +67,15 @@ public class TurtleEnemy : MonoBehaviour
                 transform.position += Vector3.forward * speed * Time.deltaTime;
             }
         }
+        if (Physics.Raycast(transform.position, Vector3.back, out hit, 2f))
+        {
+            goingForward = true;
+        }
+        if (Physics.Raycast(transform.position, Vector3.forward,out hit, 2f))
+        {
+            goingForward = false;
+        }
+            
+        
     }
 }
