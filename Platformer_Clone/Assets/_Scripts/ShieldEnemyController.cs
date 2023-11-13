@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShieldEnemyController : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 3f;
     public GameObject Point1;
     public GameObject Point2;
 
@@ -71,20 +71,12 @@ public class ShieldEnemyController : MonoBehaviour
     private void HitShieldedEnemy()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.up, out hit, 1f))
+        if (Physics.Raycast(transform.position, Vector3.up, out hit, 3f))
         {
-            if (hit.collider.tag == "Player")
+            if (hit.collider.tag == "PlayerController")
             {
                 this.gameObject.SetActive(false);
             }
-        }
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f))
-        {
-            goingUpAndDown = true;
-        }
-        if (Physics.Raycast(transform.position, Vector3.up, out hit, 1f))
-        {
-            goingUpAndDown = false;
         }
     }
 }
