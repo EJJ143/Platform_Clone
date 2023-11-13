@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,13 +13,13 @@ public class PlayerController : MonoBehaviour
 {
     //All game objects go below this line
     //public GameObject spawnPoint;
-    public GameObject turnHere;
-    public Portal portal;
+
+
     private Rigidbody rigidBody;
 
     //All integers/floats go below this line
     public float speed;
-    public float jumpForce = 8f;  
+    public float jumpForce = 8f;
     public float fallDepth = 10f;
     public int wumpaFruitCollected = 0;
     public int lives = 3;
@@ -27,12 +28,20 @@ public class PlayerController : MonoBehaviour
     private Vector3 startPosition;
 
     private bool isGrounded;
+    private bool attacking;
+    private bool waiting;
+
+    private Renderer objectRenderer;
+
+    public Material redMaterial;
+    public Material greenMaterial;
 
     // Start is called before the first frame update
     void Start()
     {
         startPosition = transform.position;
         rigidBody = GetComponent<Rigidbody>();
+        objectRenderer = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -42,12 +51,13 @@ public class PlayerController : MonoBehaviour
         Move();
         Turn();
         Jump();
+        SpinAttack();
         if (transform.position.y <= -10)
         {
             Respawn();
         }
     }
-    
+
     private void Move()
     {
         if (Input.GetKey(KeyCode.W))
@@ -117,11 +127,11 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
             Debug.Log("not on the ground");
         }
-        
-        if (Input.GetKeyDown(KeyCode.Space)&& isGrounded == true)
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
         {
-            rigidBody.AddForce(Vector3.up *jumpForce, ForceMode.Impulse);
-            
+            rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
             //this is reserved for the jump function
 
             //A.S working
@@ -130,12 +140,24 @@ public class PlayerController : MonoBehaviour
     }
     private void SpinAttack()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             //this is reserved for the spin attack, i felt like it should be left click but it can be whatever
+            if (waiting == true)
+            {
+                StartCoroutine(Wait());
+
+            }
+            if (waiting == false)
+            {
+                StartCoroutine(Attack());
+
+            }
+
+
         }
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "WumpaFruit")
@@ -149,19 +171,40 @@ public class PlayerController : MonoBehaviour
                 lives++;
             }
         }
-        if (other.gameObject.tag == "Portal") 
+        if (other.gameObject.tag == "Portal")
         {
             startPosition = other.gameObject.GetComponent<Portal>().newSpawn.transform.position;
             transform.position = startPosition;
         }
         if (other.gameObject.tag == "Turtle")
         {
-            Respawn();
+            if (attacking == true)
+            {
+                other.gameObject.SetActive(false);
+            }
+            else
+            {
+                Respawn();
+            }
+            
         }
         if (other.gameObject.tag == "Shielded Enemy")
         {
             Respawn();
         }
     }
-   
+    public IEnumerator Attack()
+    {
+        objectRenderer.material = redMaterial;
+        attacking = true;
+        yield return new WaitForSeconds(1f);
+        objectRenderer.material = greenMaterial;
+        attacking = false;
+        waiting = true;
+    }
+    public IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(1.5f);
+        waiting = false;
+    }
 }

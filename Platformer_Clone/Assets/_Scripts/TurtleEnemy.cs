@@ -22,6 +22,8 @@ public class TurtleEnemy : MonoBehaviour
 
     //the direction it is going 
     public bool goingForward;
+    public bool xAxisMovement;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -41,37 +43,70 @@ public class TurtleEnemy : MonoBehaviour
     private void TurtleEnemyMove()
     {
         RaycastHit hit;
-        if (goingForward == true)
+        if (xAxisMovement == true)
         {
-            //once the enemy reaches the forwardPos - goingForward is false
-            if (transform.position.z <= forwardPos.z)
+            if (goingForward == true)
             {
-                goingForward = false;
+                //once the enemy reaches the forwardPos - goingForward is false
+                if (transform.position.x >= forwardPos.x)
+                {
+                    goingForward = false;
+                }
+                else
+                {
+                    //translate the enemy back by speed using Time.deltaTime
+                    transform.position += transform.right * speed * Time.deltaTime;
+                }
             }
             else
             {
-                //translate the enemy back by speed using Time.deltaTime
-                transform.position += Vector3.back * speed * Time.deltaTime;
+                //once the enemy reaches the backPos - goingForward is true
+                if (transform.position.x <= backPos.x)
+                {
+                    goingForward = true;
+                }
+                else
+                {
+                    //translate the enemy forward by speed using Time.deltaTime
+                    transform.position += -transform.right * speed * Time.deltaTime;
+                }
             }
         }
         else
         {
-            //once the enemy reaches the backPos - goingForward is true
-            if (transform.position.z >= backPos.z)
+            if (goingForward == true)
             {
-                goingForward = true;
+                //once the enemy reaches the forwardPos - goingForward is false
+                if (transform.position.z <= forwardPos.z)
+                {
+                    goingForward = false;
+                }
+                else
+                {
+                    //translate the enemy back by speed using Time.deltaTime
+                    transform.position += Vector3.back * speed * Time.deltaTime;
+                }
             }
             else
             {
-                //translate the enemy forward by speed using Time.deltaTime
-                transform.position += Vector3.forward * speed * Time.deltaTime;
+                //once the enemy reaches the backPos - goingForward is true
+                if (transform.position.z >= backPos.z)
+                {
+                    goingForward = true;
+                }
+                else
+                {
+                    //translate the enemy forward by speed using Time.deltaTime
+                    transform.position += Vector3.forward * speed * Time.deltaTime;
+                }
             }
         }
-        if (Physics.Raycast(transform.position, Vector3.back, out hit, 2f))
+        
+        if (Physics.Raycast(transform.position, -transform.forward, out hit, 1f))
         {
             goingForward = true;
         }
-        if (Physics.Raycast(transform.position, Vector3.forward,out hit, 2f))
+        if (Physics.Raycast(transform.position, transform.forward,out hit, 1f))
         {
             goingForward = false;
         }
