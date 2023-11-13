@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -119,8 +120,16 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1.5f))
         {
-            isGrounded = true;
-            Debug.Log("on ground");
+            if(hit.collider.tag == "RegularEnemy")
+            {
+                isGrounded = false;
+            }
+            else
+            {
+                isGrounded = true;
+                Debug.Log("on ground");
+            }
+            
         }
         else
         {
@@ -159,7 +168,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "WumpaFruit")
         {
             //if collide with a wumpa fruit add it to score and delete it
-            wumpaFruitCollected++;
+            wumpaFruitCollected+=2;
             other.gameObject.SetActive(false);
             //adds an extra life if player collects 100 wumpa fruits
             if (wumpaFruitCollected == 100)
