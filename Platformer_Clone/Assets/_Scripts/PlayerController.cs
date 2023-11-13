@@ -149,6 +149,10 @@ public class PlayerController : MonoBehaviour
             startPosition = other.gameObject.GetComponent<Portal>().newSpawn.transform.position;
             transform.position = startPosition;
         }
+        if (other.gameObject.tag == "Turtle")
+        {
+            Respawn();
+        }
     }
    
 }
