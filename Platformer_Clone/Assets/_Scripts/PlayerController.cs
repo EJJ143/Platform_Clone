@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded;
     private bool attacking;
-    private bool waiting;
+    private bool waiting = false;
 
     private Renderer objectRenderer;
 
@@ -140,22 +140,18 @@ public class PlayerController : MonoBehaviour
     }
     private void SpinAttack()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (waiting == false)
         {
-            //this is reserved for the spin attack, i felt like it should be left click but it can be whatever
-            if (waiting == true)
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                StartCoroutine(Wait());
-
+                if (waiting == false)
+                {
+                    StartCoroutine(Attack());                  
+                }
+               
             }
-            if (waiting == false)
-            {
-                StartCoroutine(Attack());
-
-            }
-
-
         }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -171,9 +167,9 @@ public class PlayerController : MonoBehaviour
                 lives++;
             }
         }
-        if(other.gameObject.tag == "RegularEnemy")
+        if (other.gameObject.tag == "RegularEnemy")
         {
-            if(isGrounded == false)
+            if (isGrounded == false)
             {
                 other.gameObject.SetActive(false);
             }
@@ -201,7 +197,7 @@ public class PlayerController : MonoBehaviour
             {
                 Respawn();
             }
-            
+
         }
         if (other.gameObject.tag == "Shielded Enemy")
         {
@@ -210,12 +206,15 @@ public class PlayerController : MonoBehaviour
     }
     public IEnumerator Attack()
     {
+
         objectRenderer.material = redMaterial;
         attacking = true;
         yield return new WaitForSeconds(1f);
         objectRenderer.material = greenMaterial;
         attacking = false;
         waiting = true;
+        StartCoroutine(Wait());
+
     }
     public IEnumerator Wait()
     {
