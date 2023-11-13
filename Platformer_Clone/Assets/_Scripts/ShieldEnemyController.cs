@@ -25,11 +25,11 @@ public class ShieldEnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ShieldTurtleMove();
-        
+        ShieldEnemyMove();
+        HitShieldedEnemy();
     }
 
-    private void ShieldTurtleMove()
+    private void ShieldEnemyMove()
     {
         RaycastHit hit;
 
@@ -67,5 +67,24 @@ public class ShieldEnemyController : MonoBehaviour
             transform.Rotate(0f, 180f, 0f);
         }
     }
-    
+
+    private void HitShieldedEnemy()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.up, out hit, 1f))
+        {
+            if (hit.collider.tag == "Player")
+            {
+                this.gameObject.SetActive(false);
+            }
+        }
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f))
+        {
+            goingUpAndDown = true;
+        }
+        if (Physics.Raycast(transform.position, Vector3.up, out hit, 1f))
+        {
+            goingUpAndDown = false;
+        }
+    }
 }
