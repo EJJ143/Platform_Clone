@@ -143,6 +143,11 @@ public class PlayerController : MonoBehaviour
             //if collide with a wumpa fruit add it to score and delete it
             wumpaFruitCollected++;
             other.gameObject.SetActive(false);
+            //adds an extra life if player collects 100 wumpa fruits
+            if (wumpaFruitCollected == 100)
+            {
+                lives++;
+            }
         }
         if (other.gameObject.tag == "Portal") 
         {
