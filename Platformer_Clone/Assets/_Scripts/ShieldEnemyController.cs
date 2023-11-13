@@ -30,29 +30,25 @@ public class ShieldEnemyController : MonoBehaviour
 
     private void ShieldTurtleMove()
     {
-        if (goingRight)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 1.5f))
         {
-            if (transform.position.x >= rightPos.x)
+            if (goingRight == true)
             {
                 goingRight = false;
-                Debug.Log("goingRight is now false");
             }
             else
             {
-                transform.position += Vector3.forward * speed * Time.deltaTime;
-            }          
+                goingRight = true;
+            }
+        }
+        if (goingRight == true)
+        {
+            transform.position += transform.forward * speed * Time.deltaTime;       
         }
         if (!goingRight)
         {
-            if (transform.position.x >= leftPos.x)
-            {
-                goingRight = true;
-                Debug.Log("goingRight is now true");
-            }
-            else
-            {
-                transform.position += transform.forward * speed * Time.deltaTime;
-            }
+            transform.position += -transform.forward * speed * Time.deltaTime;
         }
 
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //Authors: Johnson, Ethan
 //         Suazo, Angel
@@ -41,7 +42,10 @@ public class PlayerController : MonoBehaviour
         Move();
         Turn();
         Jump();
-       
+        if (transform.position.y <= -10)
+        {
+            Respawn();
+        }
     }
     
     private void Move()
@@ -93,7 +97,7 @@ public class PlayerController : MonoBehaviour
         //check to see if player has 0 lives
         if (lives == 0)
         {
-            //insert scenemanager here with endscreen
+            SceneManager.LoadScene(2);
         }
     }
 
