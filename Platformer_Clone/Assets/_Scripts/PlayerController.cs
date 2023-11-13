@@ -153,6 +153,10 @@ public class PlayerController : MonoBehaviour
         {
             Respawn();
         }
+        if (other.gameObject.tag == "Shielded Enemy")
+        {
+            Respawn();
+        }
     }
    
 }
