@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Authors: Johnson, Ethan
+//         Suazo, Angel
+//Last Modified:11/12/23
+//Purpose: To handle the shielded enemy movement & how to kill it.
+
 public class ShieldEnemyController : MonoBehaviour
 {
     public float speed = 3f;

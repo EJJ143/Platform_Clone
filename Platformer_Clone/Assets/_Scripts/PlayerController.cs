@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 
 //Authors: Johnson, Ethan
 //         Suazo, Angel
-//Last Modified:10/25/23
+//Last Modified:11/12/23
 //Purpose: To handle all interactions between the players and their avatar
 public class PlayerController : MonoBehaviour
 {
+    // This is the game object for the wumpas to be cloned
     public GameObject Wumpas;
 
     private Rigidbody rigidBody;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     private Renderer objectRenderer;
 
+    // These are the colors for showing the spin attack
     public Material redMaterial;
     public Material greenMaterial;
 
@@ -145,6 +147,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles players spinning attack action.
+    /// </summary>
     private void SpinAttack()
     {
         if (waiting == false)
