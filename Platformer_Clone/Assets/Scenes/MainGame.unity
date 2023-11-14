@@ -16772,12 +16772,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a7e995e455e62499933454e1a80bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Wumpas: {fileID: 7221751388923570935, guid: c9ee6edca2410df47bcbdc1e2d821289, type: 3}
   spinSpeed: 5
   speed: 10
   jumpForce: 8
   fallDepth: -10
   wumpaFruitCollected: 0
   lives: 3
+  attacking: 0
   redMaterial: {fileID: 2100000, guid: d6cee53233098c742a8e88dae79b76c3, type: 2}
   greenMaterial: {fileID: 2100000, guid: c863aa8553c0b6640aad0cd88918615f, type: 2}
 --- !u!54 &2007235944

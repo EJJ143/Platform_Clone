@@ -10,7 +10,8 @@ using UnityEngine.SceneManagement;
 //Purpose: To handle all interactions between the players and their avatar
 public class PlayerController : MonoBehaviour
 {
-   
+    public GameObject Wumpas;
+
     private Rigidbody rigidBody;
 
     //All integers/floats go below this line
@@ -164,7 +165,11 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Crate")
         {
-            other.gameObject.SetActive(false);
+            if (attacking == true)
+            {
+                other.gameObject.SetActive(false);
+                Instantiate(Wumpas, other.transform.position, other.transform.rotation);
+            }
         }
         if (other.gameObject.tag == "WumpaFruit")
         {
