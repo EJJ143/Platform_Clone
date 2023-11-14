@@ -10,9 +10,7 @@ using UnityEngine.SceneManagement;
 //Purpose: To handle all interactions between the players and their avatar
 public class PlayerController : MonoBehaviour
 {
-    //All game objects go below this line
-    //public GameObject spawnPoint;
-
+   
     private Rigidbody rigidBody;
 
     //All integers/floats go below this line
@@ -27,7 +25,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 startPosition;
 
     private bool isGrounded;
-    private bool attacking;
+    public bool attacking;
     private bool waiting = false;
 
     private Renderer objectRenderer;
@@ -186,7 +184,14 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.tag == "Turtle")
         {
-            Respawn();
+            if (attacking == true)
+            {
+                other.gameObject.SetActive(false);
+            }
+            else
+            {
+                Respawn();
+            }
         }
         if (other.gameObject.tag == "Shielded Enemy")
         {
@@ -195,6 +200,21 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Spikes")
         {
             Respawn();
+        }
+        if (other.gameObject.tag == "RegularEnemy")
+        {
+            if (isGrounded == false)
+            {
+                other.gameObject.SetActive(false);
+            }
+            if (attacking == true)
+            {
+                other.gameObject.SetActive(false);
+            }
+            if (attacking == false && isGrounded == true )
+            {
+                Respawn();
+            }
         }
     }
     public IEnumerator Attack()
