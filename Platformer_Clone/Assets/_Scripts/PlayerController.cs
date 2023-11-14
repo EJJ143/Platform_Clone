@@ -12,8 +12,7 @@ public class PlayerController : MonoBehaviour
 {
     //All game objects go below this line
     //public GameObject spawnPoint;
-    public GameObject turnHere;
-    public Portal portal;
+
     private Rigidbody rigidBody;
 
     //All integers/floats go below this line
@@ -28,12 +27,20 @@ public class PlayerController : MonoBehaviour
     private Vector3 startPosition;
 
     private bool isGrounded;
+    private bool attacking;
+    private bool waiting = false;
+
+    private Renderer objectRenderer;
+
+    public Material redMaterial;
+    public Material greenMaterial;
 
     // Start is called before the first frame update
     void Start()
     {
         startPosition = transform.position;
         rigidBody = GetComponent<Rigidbody>();
+        objectRenderer = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -43,6 +50,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Turn();
         Jump();
+        SpinAttack();
         if (transform.position.y <= -10)
         {
             Respawn();
@@ -116,8 +124,15 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 1.5f))
         {
-            isGrounded = true;
-            Debug.Log("on ground");
+            if (hit.collider.tag == "RegularEnemy")
+            {
+                isGrounded = false;
+            }
+            else
+            {
+                isGrounded = true;
+                Debug.Log("on ground");
+            }
         }
         else
         {
@@ -131,19 +146,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Commented out this function for attacking
-    /// </summary>
-    /// <param name="other"></param>
-    /*private void SpinAttack()
+    private void SpinAttack()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (waiting == false)
         {
-            //this is reserved for the spin attack, i felt like it should be left click but it can be whatever
-            transform.Rotate(Vector3.up, spinSpeed * Time.deltaTime);
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                if (waiting == false)
+                {
+                    StartCoroutine(Attack());
+                }
+
+            }
         }
-    } */
-    
+
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Crate")
@@ -153,7 +171,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "WumpaFruit")
         {
             //if collide with a wumpa fruit add it to score and delete it
-            wumpaFruitCollected++;
+            wumpaFruitCollected += 2;
             other.gameObject.SetActive(false);
             //adds an extra life if player collects 100 wumpa fruits
             if (wumpaFruitCollected == 100)
@@ -179,5 +197,21 @@ public class PlayerController : MonoBehaviour
             Respawn();
         }
     }
-   
+    public IEnumerator Attack()
+    {
+
+        objectRenderer.material = redMaterial;
+        attacking = true;
+        yield return new WaitForSeconds(1f);
+        objectRenderer.material = greenMaterial;
+        attacking = false;
+        waiting = true;
+        StartCoroutine(Wait());
+
+    }
+    public IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(1.5f);
+        waiting = false;
+    }
 }
