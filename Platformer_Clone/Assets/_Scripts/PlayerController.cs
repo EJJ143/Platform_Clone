@@ -192,7 +192,7 @@ public class PlayerController : MonoBehaviour
         {
             Respawn();
         }
-        if (other.gameObject.tag == "Spike")
+        if (other.gameObject.tag == "Spikes")
         {
             Respawn();
         }
