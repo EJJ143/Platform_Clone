@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigidBody;
 
     //All integers/floats go below this line
+    public float spinSpeed = 5f;
     public float speed;
     public float jumpForce = 8f;  
     public float fallDepth = 10f;
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
         {
             Respawn();
         }
+        SpinAttack();
     }
     
     private void Move()
@@ -133,6 +135,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0))
         {
             //this is reserved for the spin attack, i felt like it should be left click but it can be whatever
+            transform.Rotate(Vector3.up, spinSpeed * Time.deltaTime);
         }
     }
     
@@ -159,6 +162,10 @@ public class PlayerController : MonoBehaviour
             Respawn();
         }
         if (other.gameObject.tag == "Shielded Enemy")
+        {
+            Respawn();
+        }
+        if (other.gameObject.tag == "Spike")
         {
             Respawn();
         }
