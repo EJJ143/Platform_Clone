@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+//Authors: Johnson, Ethan
+//         Suazo, Angel
+//Last Modified:11/13/23
+//Purpose:To handle displaying score (wumpa fruit collected) and the amount of lives the player has in the main scene
 public class UIManager : MonoBehaviour
 {
     public PlayerController playerController;

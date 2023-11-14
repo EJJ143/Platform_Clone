@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Authors: Johnson, Ethan
+//         Suazo, Angel
+//Last Modified:11/13/23
+//Purpose: To display the UI for the game over scene
 public class EndScreen : MonoBehaviour
 {
     // Start is called before the first frame update
