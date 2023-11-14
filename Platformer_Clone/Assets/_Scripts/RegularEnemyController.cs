@@ -1,13 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/*
- * Author: [Suazo, Angel]
- * Last Updated: [11/12/2023]
- * [Handles side to side movement of turtle enemy]
- */
 
-public class TurtleEnemy : MonoBehaviour
+public class RegularEnemyController : MonoBehaviour
 {
     //game objects to determine how far left/right enemy goes
     public GameObject forwardPoint;
@@ -23,7 +18,6 @@ public class TurtleEnemy : MonoBehaviour
     //the direction it is going 
     public bool goingForward;
     public bool xAxisMovement;
-    
 
     // Start is called before the first frame update
     void Start()
@@ -37,9 +31,6 @@ public class TurtleEnemy : MonoBehaviour
     {
         TurtleEnemyMove();
     }
-    /// <summary>
-    /// Make the enemy move forward and back
-    /// </summary>
     private void TurtleEnemyMove()
     {
         RaycastHit hit;
@@ -101,16 +92,16 @@ public class TurtleEnemy : MonoBehaviour
                 }
             }
         }
-        
+
         if (Physics.Raycast(transform.position, -transform.forward, out hit, 1f))
         {
             goingForward = true;
         }
-        if (Physics.Raycast(transform.position, transform.forward,out hit, 1f))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 1f))
         {
             goingForward = false;
         }
-            
-        
+
+
     }
 }
