@@ -146,6 +146,10 @@ public class PlayerController : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Crate")
+        {
+            other.gameObject.SetActive(false);
+        }
         if (other.gameObject.tag == "WumpaFruit")
         {
             //if collide with a wumpa fruit add it to score and delete it
