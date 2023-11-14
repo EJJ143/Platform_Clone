@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/*
- * Author: [Suazo, Angel]
- * Last Updated: [11/12/2023]
- * [Handles side to side movement of turtle enemy]
- */
-
+//Authors: Johnson, Ethan
+//         Suazo, Angel
+//Last Modified:11/12/23
+//Purpose: To handle the turles movement
 public class TurtleEnemy : MonoBehaviour
 {
     //game objects to determine how far left/right enemy goes

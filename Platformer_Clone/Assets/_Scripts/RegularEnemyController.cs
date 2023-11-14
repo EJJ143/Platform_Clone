@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Authors: Johnson, Ethan
+//         Suazo, Angel
+//Last Modified:11/12/23
+//Purpose: To handle the regular enemy movement
 public class RegularEnemyController : MonoBehaviour
 {
     //game objects to determine how far left/right enemy goes
@@ -31,6 +35,10 @@ public class RegularEnemyController : MonoBehaviour
     {
         TurtleEnemyMove();
     }
+
+    /// <summary>
+    /// Handles the movement of the regular enemy by checking if it is going forward 
+    /// </summary>
     private void TurtleEnemyMove()
     {
         RaycastHit hit;
