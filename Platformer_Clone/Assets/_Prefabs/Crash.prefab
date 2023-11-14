@@ -521,6 +521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8234312439053570921}
   - component: {fileID: -199114821143313348}
+  - component: {fileID: -6410302326463929483}
   m_Layer: 0
   m_Name: Crash
   m_TagString: Crash
@@ -574,6 +575,26 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-6410302326463929483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7676716231587056958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a7e995e455e62499933454e1a80bf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnHere: {fileID: 0}
+  portal: {fileID: 0}
+  spinSpeed: 5
+  speed: 0
+  jumpForce: 8
+  fallDepth: 10
+  wumpaFruitCollected: 0
+  lives: 3
 --- !u!1 &8309638275346174632
 GameObject:
   m_ObjectHideFlags: 0

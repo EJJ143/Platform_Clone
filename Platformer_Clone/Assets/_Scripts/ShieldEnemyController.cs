@@ -29,6 +29,9 @@ public class ShieldEnemyController : MonoBehaviour
         HitShieldedEnemy();
     }
 
+    /// <summary>
+    /// Handles movement for shielded Enemy
+    /// </summary>
     private void ShieldEnemyMove()
     {
         RaycastHit hit;
@@ -67,7 +70,9 @@ public class ShieldEnemyController : MonoBehaviour
             transform.Rotate(0f, 180f, 0f);
         }
     }
-
+    /// <summary>
+    /// Deletes enemy from the scene if player jumps on top of it
+    /// </summary>
     private void HitShieldedEnemy()
     {
         RaycastHit hit;

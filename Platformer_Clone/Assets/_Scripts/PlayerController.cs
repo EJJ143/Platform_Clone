@@ -47,9 +47,11 @@ public class PlayerController : MonoBehaviour
         {
             Respawn();
         }
-        SpinAttack();
     }
     
+    /// <summary>
+    /// Handles all movement for player
+    /// </summary>
     private void Move()
     {
         if (Input.GetKey(KeyCode.W))
@@ -77,6 +79,9 @@ public class PlayerController : MonoBehaviour
             transform.position += -transform.right * speed * Time.deltaTime;
         }
     }
+    /// <summary>
+    /// Handles the snap turning of 90 degrees with Q & E
+    /// </summary>
     private void Turn()
     {
         if (Input.GetKeyUp(KeyCode.Q))
@@ -123,21 +128,21 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)&& isGrounded == true)
         {
             rigidBody.AddForce(Vector3.up *jumpForce, ForceMode.Impulse);
-            
-            //this is reserved for the jump function
-
-            //A.S working
-
         }
     }
-    private void SpinAttack()
+
+    /// <summary>
+    /// Commented out this function for attacking
+    /// </summary>
+    /// <param name="other"></param>
+    /*private void SpinAttack()
     {
         if (Input.GetKey(KeyCode.Mouse0))
         {
             //this is reserved for the spin attack, i felt like it should be left click but it can be whatever
             transform.Rotate(Vector3.up, spinSpeed * Time.deltaTime);
         }
-    }
+    } */
     
     private void OnTriggerEnter(Collider other)
     {
